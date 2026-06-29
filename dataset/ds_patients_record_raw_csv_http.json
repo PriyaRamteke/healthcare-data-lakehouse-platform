@@ -1,0 +1,23 @@
+{
+	"name": "ds_patients_record_raw_csv_http",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_http_healthcare_reporting",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "PriyaRamteke/healthcare-data-lakehouse-platform/refs/heads/main/dataset/Patients_record.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

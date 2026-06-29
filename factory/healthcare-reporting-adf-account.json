@@ -1,0 +1,15 @@
+{
+	"name": "healthcare-reporting-adf-account",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7452c841-50c8-4a99-97f6-e4e963a618be",
+		"tenantId": "52479509-76ea-4d47-b414-8dfefc8b97b6"
+	}
+}

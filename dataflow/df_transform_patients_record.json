@@ -1,0 +1,79 @@
+{
+	"name": "df_transform_patients_record",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_raw_patients_record",
+						"type": "DatasetReference"
+					},
+					"name": "PatientsRecordSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_processed_healthcare",
+						"type": "DatasetReference"
+					},
+					"name": "PatientsSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterEuropeOnly"
+				},
+				{
+					"name": "SelectOnlyRequiredFields"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          recordId as string,",
+				"          country as string,",
+				"          territory_code as string,",
+				"          ingestion_timestamp as string,",
+				"          mainland as string,",
+				"          population_count as integer,",
+				"          batch_id as string,",
+				"          is_valid_record as boolean,",
+				"          mark as string,",
+				"          regular_count as short,",
+				"          date as date,",
+				"          amount_10_day as double,",
+				"          test_units as string,",
+				"          origin as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> PatientsRecordSource",
+				"PatientsRecordSource filter(mainland == 'Europe' && not(isNull(territory_code))) ~> FilterEuropeOnly",
+				"FilterEuropeOnly select(mapColumn(",
+				"          recordId,",
+				"          country,",
+				"          territory_code,",
+				"          population_count,",
+				"          batch_id,",
+				"          is_valid_record,",
+				"          mark,",
+				"          regular_count,",
+				"          origin,",
+				"          each(match(name=='test_units'),",
+				"               'units' = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectOnlyRequiredFields",
+				"SelectOnlyRequiredFields sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> PatientsSink"
+			]
+		}
+	}
+}

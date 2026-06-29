@@ -1,0 +1,60 @@
+{
+	"name": "ds_sql_healthcare",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_healthcare_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "recordId",
+				"type": "varchar"
+			},
+			{
+				"name": "country",
+				"type": "varchar"
+			},
+			{
+				"name": "territory_code",
+				"type": "varchar"
+			},
+			{
+				"name": "population_count",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "batch_id",
+				"type": "varchar"
+			},
+			{
+				"name": "is_valid_record",
+				"type": "bit"
+			},
+			{
+				"name": "mark",
+				"type": "varchar"
+			},
+			{
+				"name": "regular_count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "origin",
+				"type": "varchar"
+			},
+			{
+				"name": "units",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "healthcare_reporting",
+			"table": "patients_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
