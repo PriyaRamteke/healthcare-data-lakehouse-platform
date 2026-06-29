@@ -1,11 +1,11 @@
 {
-	"name": "LS_http_healthcare_reporting",
+	"name": "<your-linkedService-name>",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://raw.githubusercontent.com/",
+			"url": "<base-url>",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
